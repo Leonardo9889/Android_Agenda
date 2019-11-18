@@ -1,12 +1,13 @@
 package br.edu.unifcv.agenda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView lista;
     private Context mContext;
+    private Button button;
 
 
     @Override
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lista = findViewById(R.id.Recycler);
+        Button botaoadd = findViewById(R.id.btnAdicionar);
 
         final ContatoMock mock = new ContatoMock(this);
 
@@ -45,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        botaoadd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent(MainActivity.this, InsereDados.class);
+                startActivity(it);
+            }
+        });
 
 
         Contato_Adapter contato_Adapter = new Contato_Adapter(mContatos,onClickViewListener);
@@ -53,5 +62,9 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         lista.setLayoutManager(linearLayoutManager);
 
+
+
     }
-}
+    }
+
+
