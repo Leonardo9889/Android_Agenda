@@ -64,6 +64,7 @@ public class Contato_Model {
     public void setId(int id) {
         this.id = id;
     }
+    public Contato_Model(){}
 
     public Contato_Model (int id,String nome, String numero, String sobreNome, String email, String endereco, String referencia){
         this.id = id;

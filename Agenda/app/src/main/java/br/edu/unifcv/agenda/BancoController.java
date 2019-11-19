@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BancoController{
     private SQLiteDatabase db;
     private Contato_Banco banco;
@@ -35,19 +38,25 @@ public class BancoController{
         }
     }
 
-    public Cursor carregaDados(){
+    public List<Contato_Model> carregaDados() {
         Cursor cursor;
-        String[] campos =  {banco.NOME,banco.NUMERO};
+        String[] campos = {banco.NOME, banco.NUMERO};
         db = banco.getReadableDatabase();
         cursor = db.query(banco.TABELA, campos, null, null, null, null, null, null);
+        List<Contato_Model> contatos = new ArrayList<>();
+        try {
 
-        if(cursor!=null){
-            cursor.moveToFirst();
+            Contato_Model c = new Contato_Model();
+            contatos.add(c);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        db.close();
-        return cursor;
 
-}
+        db.close();
+        return contatos;
+    }
+
+
 
     public Cursor carregaDadoById(int id){
         Cursor cursor;
